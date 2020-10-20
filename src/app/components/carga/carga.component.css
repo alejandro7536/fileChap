@@ -1,0 +1,17 @@
+.filepond--root {
+  max-height: 10em;
+}
+
+.cursor{
+  cursor: pointer;
+}
+
+
+.filepond--drop-label {
+  color: #555;
+}
+
+
+.file-over{
+  background-color: gray !important;
+}

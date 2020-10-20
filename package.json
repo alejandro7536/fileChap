@@ -11,15 +11,27 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~10.0.3",
+    "@angular/animations": "^10.0.14",
     "@angular/common": "~10.0.3",
     "@angular/compiler": "~10.0.3",
     "@angular/core": "~10.0.3",
+    "@angular/fire": "^6.0.3",
     "@angular/forms": "~10.0.3",
     "@angular/platform-browser": "~10.0.3",
     "@angular/platform-browser-dynamic": "~10.0.3",
     "@angular/router": "~10.0.3",
+    "@fancyapps/fancybox": "^3.5.7",
+    "animate.css": "^4.1.1",
+    "filepond": "^4.21.1",
+    "filepond-plugin-file-validate-type": "^1.2.5",
+    "filepond-plugin-image-edit": "^1.6.1",
+    "filepond-plugin-image-preview": "^4.6.4",
+    "firebase": "^7.13.1",
+    "jquery": "^3.5.1",
+    "ngx-filepond": "^5.0.1",
+    "ngx-toastr": "^13.1.0",
     "rxjs": "~6.5.5",
+    "sweetalert2": "^10.6.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
@@ -41,6 +53,12 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.5"
+    "typescript": "~3.9.5",
+    "@angular-devkit/architect": ">= 0.900 < 0.1100",
+    "firebase-tools": "^8.0.0",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^6.2.2",
+    "inquirer-autocomplete-prompt": "^1.0.1",
+    "open": "^7.0.3"
   }
 }

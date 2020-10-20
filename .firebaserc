@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "filechap-4038b": {
+      "hosting": {
+        "filesfirebase": [
+          "filechap-4038b"
+        ]
+      }
+    }
+  }
+}
