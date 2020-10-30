@@ -1,14 +1,12 @@
-<app-navbar></app-navbar>
-
 <div
-  class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 animate__animated animate__fadeInRight animate__faster ">
+  class="max-w-screen-xl mx-auto py-6 px-4 sm:px-6 lg:px-8 animate__animated animate__fadeInRight animate__faster ">
   <h1 class="text-3xl font-semibold gilroyb">Cargar</h1>
 
   <div class="mt-5">
 
     <ul class="md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
       <li class="mt-10 md:mt-0">
-        <file-pond class="cursor shadow-md" #myPond [options]="pondOptions" (oninit)="pondHandleInit()"
+        <file-pond class="cursor shadow-md rounded-lg" #myPond [options]="pondOptions" (oninit)="pondHandleInit()"
           [files]="archivos" (onaddfile)="pondHandleAddFile($event)" data-allow-reorder="true"
           (onremovefile)="pondRemove($event)">
         </file-pond>
@@ -40,7 +38,7 @@
                       <div class="relative pt-1">
                         <div class="flex mb-2 items-center justify-between">
                           <div>
-                            <span *ngIf="archivo.estaSubiendo"
+                            <span *ngIf="archivo.estaSubiendo && archivo.progreso < 100 "
                               class="text-xs font-semibold inline-block py-1 px-2 rounded-full text-indigo-600 bg-indigo-200 animate__animated animate__fadeInUp animate__faster">
                               Subiendo
                             </span>
@@ -96,10 +94,10 @@
           Borrar
         </button>
 
-        <div class="mt-3 p-2 bg-indigo-600 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex animate__animated animate__fadeInDown animate__faster"
+        <div class="mt-3 p-2 bg-indigo-600 items-center text-indigo-100 leading-none rounded-full flex lg:inline-flex animate__animated animate__fadeInDown animate__faster"
           role="alert" *ngIf="cargaImagenesService.subiendo">
           <span class="flex rounded-full bg-indigo-500 px-2 py-1 text-xs font-bold mr-3">Info</span>
-          <span class="font-semibold mr-2 text-left flex-auto">Las opciones se deshabilitan mientras la carga está en progreso</span>
+          <span class="font-semibold text-sm mr-2 text-left flex-auto">Las opciones se deshabilitan mientras la carga está en progreso</span>
         </div>
       </li>
     </ul>

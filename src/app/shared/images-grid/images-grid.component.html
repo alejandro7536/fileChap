@@ -1,48 +1,50 @@
 <div class="flex flex-wrap -mx-1 lg:-mx-4">
 
-  <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/4 animate__animated animate__fadeIn"
+  <div class="px-1 w-full md:w-1/2 my-2 lg:my-2 lg:px-4 lg:w-1/4 animate__animated animate__fadeIn"
     *ngFor="let imagen of imagenes | buscarNombre: cargaImagenesService.buscarTerm">
 
     <!-- Article -->
-    <article class=" rounded-lg shadow-lg">
+    <article class=" rounded-lg shadow-md">
 
       <a data-fancybox="gallery" [href]="imagen.url" title="Ver">
         <div class="block h-auto w-full" style="height: 200px;">
-          <img class="object-cover h-48 w-full" [src]="imagen.url" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
+          <img class="object-cover h-48 w-full" [src]="imagen.url"
+            style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
         </div>
       </a>
 
-      <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+      <header class="flex leading-tight px-4 pt-2 md:px-4 md:pb-0 md:pt-1">
         <h1 class="text-sm leading-5 font-medium text-gray-700">
           {{imagen.nombre.length < 20 ? imagen.nombre : imagen.nombre | slice:0:20 }}{{imagen.nombre.length > 20 ? '...' :'' }}
         </h1>
+      </header>
+
+      <footer class="flex justify-between px-4 pb-2 md:px-4 md:pt-0 md:pb-2">
+
         <p class="text-gray-500 text-sm">
           {{imagen.date | date}}
         </p>
-      </header>
 
-      <footer class="flex items-center leading-none p-2 md:p-4">
-        <a target="_blank" [href]="imagen.url" title="Ver">
-          <span
-            class="inline-flex items-center bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+        <div class="flex">
+
+          <a target="_blank" [href]="imagen.url" title="Ver" class="text-gray-700 mr-2">
             <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
               stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
-            Descargar</span>
-        </a>
+          </a>
 
-        <a title="Borrar" (click)="borrar(imagen)" class="cursor-pointer">
-          <span
-            class="inline-flex items-center bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+          <a title="Borrar" (click)="borrar(imagen)" class="cursor-pointer text-gray-700">
+
             <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
               stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
-            Borrar</span>
-        </a>
+          </a>
+        </div>
+
       </footer>
 
     </article>

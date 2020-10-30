@@ -39,7 +39,7 @@ export class AuthService {
 
   login() {
 
-    this.authfire.signInWithPopup(new auth.GoogleAuthProvider()).then(() => this.router.navigateByUrl('fotos'));
+    this.authfire.signInWithPopup(new auth.GoogleAuthProvider()).then(() => this.router.navigateByUrl('files/home'));
 
   }
 

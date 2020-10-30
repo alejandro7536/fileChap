@@ -30,13 +30,17 @@
               "./node_modules/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css",
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css",
-              "./node_modules/animate.css/animate.min.css"
+              "./node_modules/animate.css/animate.min.css",
+              "./node_modules/swiper/swiper-bundle.min.css"
+
 
 
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js"
+              "./node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js",
+              "./node_modules/swiper/swiper-bundle.min.js"
+
 
             ]
           },

@@ -29,8 +29,8 @@ export class CargaComponent implements OnInit {
   pondOptions = {
     class: 'my-filepond',
     multiple: true,
-    labelIdle: 'Arrastra tus imágenes aquí',
-    acceptedFileTypes: 'image/jpeg, image/png'
+    labelIdle: 'Arrastra tus imágenes aquí'
+    // acceptedFileTypes: ['image/*', 'application/pdf']
   }
 
 
@@ -39,23 +39,25 @@ export class CargaComponent implements OnInit {
   }
 
   pondHandleAddFile(event: any) {
+    console.log(event.file.fileType);
+
     const fileitem: FileItem = new FileItem(event.file);
 
-    if (!fileitem.archivo.fileType.startsWith('image')){
-      this.toastr.error('El formato del archivo no es válido', 'Error', {
-        closeButton: true,
-        progressBar: true,
-        positionClass: 'toast-bottom-right'
-      });
-      return;
-    }
+    // if (!fileitem.archivo.fileType.startsWith('image') && !fileitem.archivo.fileType.startsWith('application/pdf')){
+    //   this.toastr.error('El formato del archivo no es válido', 'Error', {
+    //     closeButton: true,
+    //     progressBar: true,
+    //     positionClass: 'toast-bottom-right'
+    //   });
+    //   return;
+    // }
 
     this.archivos.push(fileitem);
 
   }
 
   cargarImagenes() {
-    this.cargaImagenesService.cargarImagenesFirebase(this.archivos);
+    this.cargaImagenesService.cargarFirebase(this.archivos);
   }
 
   vaciar() {

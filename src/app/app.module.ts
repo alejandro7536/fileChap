@@ -35,6 +35,13 @@ import { BuscarNombrePipe } from './pipes/buscar-nombre.pipe';
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
+import { ArchivosComponent } from './components/archivos/archivos.component';
+import { ComponentsComponent } from './components/components.component';
+import { FilesRoutingModule } from './components/components.routing';
+import { SlideImegesComponent } from './shared/slide-imeges/slide-imeges.component';
+import { SlideFilesComponent } from './shared/slide-files/slide-files.component';
+import { FilesGridComponent } from './shared/files-grid/files-grid.component';
 registerPlugin(FilePondPluginFileValidateType);
 registerPlugin(FilePondPluginImagePreview);
 registerPlugin(FilePondPluginImageEdit);
@@ -51,10 +58,17 @@ registerPlugin(FilePondPluginImageEdit);
     BuscarNombrePipe,
     LoaderComponent,
     FooterComponent,
+    HomeComponent,
+    ArchivosComponent,
+    ComponentsComponent,
+    SlideImegesComponent,
+    SlideFilesComponent,
+    FilesGridComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FilesRoutingModule,
     FormsModule,
     FilePondModule, // add filepond module here
     AngularFireModule.initializeApp(environment.firebase),

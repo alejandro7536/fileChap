@@ -1,0 +1,10 @@
+.swiper-container {
+  width: 100%;
+  height: 250px;
+}
+
+@media only screen and (max-width: 1030px) {
+  .name{
+    display: none;
+  }
+}

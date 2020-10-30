@@ -1,30 +1,30 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Imagen } from '../../models/imagen.interface';
+import { FileUpload } from '../../models/fileUpload.interface';
 import { CargaImagenesService } from '../../services/carga-imagenes.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-images-grid',
-  templateUrl: './images-grid.component.html',
-  styleUrls: ['./images-grid.component.css']
+  selector: 'app-files-grid',
+  templateUrl: './files-grid.component.html',
+  styleUrls: ['./files-grid.component.css']
 })
-export class ImagesGridComponent implements OnInit {
+export class FilesGridComponent implements OnInit {
 
-  @Input() imagenes: Imagen[] = [];
+  @Input() archivos: FileUpload[] = [];
+
 
   constructor(
-    public cargaImagenesService: CargaImagenesService,
+    public cargaImagenesService: CargaImagenesService
+
   ) { }
 
   ngOnInit(): void {
   }
 
-
-  borrar(imagen: Imagen) {
-
+  borrar(file: FileUpload) {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: `Se eliminará ${imagen.nombre}`,
+      text: `Se eliminará ${file.nombre}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#5362aa',
@@ -33,10 +33,10 @@ export class ImagesGridComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cargaImagenesService.eliminar(imagen.uid, 'image');
+        this.cargaImagenesService.eliminar(file.uid);
         Swal.fire(
           'Eliminado!',
-          ` ${imagen.nombre} se eliminó`,
+          ` ${file.nombre} se eliminó`,
           'success'
         );
       }
@@ -44,3 +44,5 @@ export class ImagesGridComponent implements OnInit {
   }
 
 }
+
+

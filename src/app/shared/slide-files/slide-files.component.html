@@ -1,0 +1,36 @@
+<div class="swiper-container">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+
+    <div class="swiper-slide" *ngFor="let archivo of archivos" [title]="archivo.nombre">
+      <div class="flex-shrink-0 relative overflow-hidden rounded-lg shadow-sm w-full bg-{{archivo.icon.color}}  bg-opacity-25">
+        <div class="flex flex-col justify-between px-6 pb-4 mt-4 h-auto">
+          <div class="flex justify-between">
+            <span class="text-sm font-medium text-gray-900"> {{archivo.nombre.length < 29 ? archivo.nombre : archivo.nombre | slice:0:29 }}{{archivo.nombre.length > 29 ? '...' :'' }}</span>
+            <a data-fancybox="gallery" [href]="archivo.url" title="Ver"
+              *ngIf="archivo.type == 'application/pdf' else icon">
+              <i class="fas {{archivo.icon.icon}} text-{{archivo.icon.color}}"></i>
+            </a>
+
+            <ng-template #icon>
+              <i class="fas {{archivo.icon.icon}} text-{{archivo.icon.color}}"></i>
+            </ng-template>
+
+
+          </div>
+          <div class="flex mt-4">
+            <a target="_blank" [href]="archivo.url" title="Descargar" class="text-gray-700 mr-2">
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
+            <span class="text-sm block opacity-75 -mb-1">{{archivo.size /1024/1024 | number:'.0-2'}} MB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
