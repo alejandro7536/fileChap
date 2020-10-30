@@ -33,7 +33,7 @@ export class ImagesGridComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cargaImagenesService.eliminar(imagen.uid, 'image');
+        this.cargaImagenesService.eliminar(imagen, 'image');
         Swal.fire(
           'Eliminado!',
           ` ${imagen.nombre} se eliminó`,

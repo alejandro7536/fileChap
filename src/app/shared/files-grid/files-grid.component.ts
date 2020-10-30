@@ -33,7 +33,7 @@ export class FilesGridComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cargaImagenesService.eliminar(file.uid);
+        this.cargaImagenesService.eliminar(file);
         Swal.fire(
           'Eliminado!',
           ` ${file.nombre} se eliminó`,

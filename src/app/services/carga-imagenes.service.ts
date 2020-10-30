@@ -5,6 +5,7 @@ import { FileItem } from '../models/file-item.model';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
 import { FileUpload } from '../models/fileUpload.interface';
+import { Imagen } from '../models/imagen.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class CargaImagenesService {
 
   public buscarTerm = '';
   public subiendo = false; // bloquear botones mientras se esta subiendo
+  storageRef = firebase.storage().ref();
+
 
   constructor(
     private db: AngularFirestore,
@@ -28,7 +31,6 @@ export class CargaImagenesService {
   cargarFirebase(files: FileItem[]) {
     console.log(files);
     this.subiendo = true;
-    const storageRef = firebase.storage().ref();
 
     for (const item of files) {
 
@@ -43,11 +45,11 @@ export class CargaImagenesService {
 
 
       if (item.archivo.fileType.startsWith('image')) {
-        this.cargarImagen(storageRef, item);
+        this.cargarImagen(this.storageRef, item);
 
       } else {
 
-        this.cargarArchivo(storageRef, item);
+        this.cargarArchivo(this.storageRef, item);
 
       }
     }
@@ -72,11 +74,29 @@ export class CargaImagenesService {
     return this.db.collection(`data/${this.userid}/files`, ref => ref.orderBy('date', 'desc')).valueChanges();
   }
 
-  eliminar(uid: string, tipo?: string) {
+  eliminar(file: Imagen | FileUpload , tipo?: string) {
     if (tipo === 'image') {
-      return this.db.collection(`data/${this.userid}/images`).doc(uid).delete();
+      const desertRef = this.storageRef.child(`${this.userid}/img/${file.nombre}`);
+      desertRef.delete().then(()  => {
+        return this.db.collection(`data/${this.userid}/images`).doc(file.uid).delete();
+      }).catch((error) => {
+        this.toastr.error(`${file.nombre} cargada correctamente`, 'Error', {
+          closeButton: true,
+          progressBar: true,
+          positionClass: 'toast-bottom-right'
+        });
+      });
     } else {
-      return this.db.collection(`data/${this.userid}/files`).doc(uid).delete();
+      const desertRef = this.storageRef.child(`${this.userid}/files/${file.nombre}`);
+      desertRef.delete().then(()  => {
+        return this.db.collection(`data/${this.userid}/files`).doc(file.uid).delete();
+      }).catch((error) => {
+        this.toastr.error(`${file.nombre} cargada correctamente`, 'Error', {
+          closeButton: true,
+          progressBar: true,
+          positionClass: 'toast-bottom-right'
+        });
+      });
     }
   }
 
