@@ -4,8 +4,10 @@
 
   <ng-template #home>
 
-    <h1 class="text-3xl font-semibold gilroyb text-gray-900">Archivos recientes</h1>
-    <hr>
+    <div *ngIf="imagenes.length > 0 && !loading && archivos.length > 0">
+      <h1 class="text-3xl font-semibold gilroyb text-gray-900">Archivos recientes</h1>
+      <hr>
+    </div>
 
     <div *ngIf="imagenes.length > 0" class="pt-5 animate__animated animate__fadeIn">
       <div class="flex justify-between w-full mb-5">
@@ -65,5 +67,7 @@
     </div>
 
   </div>
+
+
 
 </div>

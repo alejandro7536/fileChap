@@ -1,0 +1,37 @@
+<div class="container mx-auto py-6 px-5 sm:px-10 animate__animated animate__fadeInLeft animate__faster">
+  <app-loader *ngIf="loading; else shared"></app-loader>
+
+  <ng-template #shared>
+    <!-- tabs -->
+     <ul class="flex border-b mb-5">
+       <li class="-mb-px mr-1">
+         <a class="bg-white inline-block py-2 px-4 text-gray-600 hover:text-gray-800 font-semibold cursor-pointer"
+         [ngClass]="{'border-l border-t border-r rounded-t font-semibold': sharedMe}"
+         (click)="tab1()"
+         >Compartidos con migo <span *ngIf="sharedMeFiles.length > 0" >( {{sharedMeFiles.length}} )</span> </a>
+       </li>
+       <li class="-mb-px mr-1">
+         <a class="bg-white inline-block py-2 px-4 text-gray-600 hover:text-gray-800 cursor-pointer"
+         [ngClass]="{'border-l border-t border-r rounded-t font-semibold': sharedWith}"
+         (click)="tab2()"
+         >Compartidos <span *ngIf="sharedWithFiles.length > 0" >( {{sharedWithFiles.length}} )</span> </a>
+       </li>
+     </ul>
+
+    <!-- Shared me -->
+    <div *ngIf="sharedMe" >
+      <div *ngIf="!loading && sharedMeFiles.length == 0" >
+        <h1 class="text-gray-600">Aún no te han compartido archivos</h1>
+      </div>
+      <app-shared-files-grid [archivos]="sharedMeFiles" [canRemove]="false" *ngIf="sharedMeFiles" ></app-shared-files-grid>
+    </div>
+
+    <!-- shared with -->
+    <div *ngIf="sharedWith" >
+      <div *ngIf="!loading && sharedWithFiles.length == 0" >
+        <h1 class="text-gray-600">Aún no haz compartido archivos</h1>
+      </div>
+      <app-shared-files-grid [archivos]="sharedWithFiles" [canRemove]="true" *ngIf="sharedWithFiles"></app-shared-files-grid>
+    </div>
+  </ng-template>
+</div>

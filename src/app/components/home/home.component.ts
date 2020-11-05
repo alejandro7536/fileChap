@@ -32,14 +32,6 @@ export class HomeComponent implements OnInit {
       this.imagenes = images;
       this.archivos = files;
     });
-
-    console.log(this.loading);
-
-
   }
-
-
-
-
 
 }

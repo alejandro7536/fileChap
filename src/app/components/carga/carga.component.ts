@@ -29,7 +29,7 @@ export class CargaComponent implements OnInit {
   pondOptions = {
     class: 'my-filepond',
     multiple: true,
-    labelIdle: 'Arrastra tus imágenes aquí'
+    labelIdle: 'Arrastra tus archivos aquí'
     // acceptedFileTypes: ['image/*', 'application/pdf']
   }
 

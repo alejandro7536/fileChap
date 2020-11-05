@@ -29,8 +29,8 @@
       </div>
     </div>
 
-    <div class="mt-5 flex lg:mt-0 lg:ml-4">
-      <span class="sm:block shadow-sm rounded-md">
+    <div class="mt-5 flex flex-wrap lg:mt-0 lg:ml-4">
+      <span class="sm:block shadow-sm rounded-md mt-1 ml-3">
         <button type="button" routerLink="home" [disabled]="images.subiendo"
           class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
           <!-- Heroicon name: pencil -->
@@ -43,8 +43,21 @@
         </button>
       </span>
 
+      <span class="sm:block shadow-sm rounded-md ml-3 mt-1">
+        <button type="button" routerLink="shared" [disabled]="images.subiendo"
+          class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
+          <!-- Heroicon name: pencil -->
+          <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+          </svg>
+          Compartido
+        </button>
+      </span>
 
-      <span class="sm:block ml-3 shadow-sm rounded-md">
+
+      <span class="sm:block ml-3 shadow-sm rounded-md  mt-1">
         <button type="button" routerLink="cargar" [disabled]="images.subiendo"
           class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
           <!-- Heroicon name: link -->
@@ -57,7 +70,7 @@
         </button>
       </span>
 
-      <span class="sm:block ml-3 shadow-sm rounded-md">
+      <span class="sm:block ml-3 shadow-sm rounded-md  mt-1">
         <button type="button" (click)="logout()" [disabled]="images.subiendo"
           class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700 transition duration-150 ease-in-out">
           <!-- Heroicon name: check -->

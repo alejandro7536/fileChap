@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Imagen } from '../../models/imagen.interface';
 import { CargaImagenesService } from '../../services/carga-imagenes.service';
 import Swal from 'sweetalert2';
+import { FileUpload } from '../../models/fileUpload.interface';
 
 @Component({
   selector: 'app-images-grid',
@@ -11,6 +12,10 @@ import Swal from 'sweetalert2';
 export class ImagesGridComponent implements OnInit {
 
   @Input() imagenes: Imagen[] = [];
+
+  public comp = false;
+  public compFile: FileUpload;
+
 
   constructor(
     public cargaImagenesService: CargaImagenesService,
@@ -34,13 +39,26 @@ export class ImagesGridComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.cargaImagenesService.eliminar(imagen, 'image');
-        Swal.fire(
-          'Eliminado!',
-          ` ${imagen.nombre} se eliminó`,
-          'success'
-        );
       }
     });
   }
+
+  compartir(file: FileUpload) {
+    this.compFile = {
+      ...file,
+      type: 'image',
+      icon: {
+        icon: 'fa-file-image',
+        color: 'red-400'
+      }
+    };
+    this.comp = true;
+  }
+
+  cancelar() {
+    this.compFile = null;
+    this.comp = false;
+  }
+
 
 }

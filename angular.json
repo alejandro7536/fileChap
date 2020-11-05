@@ -33,8 +33,6 @@
               "./node_modules/animate.css/animate.min.css",
               "./node_modules/swiper/swiper-bundle.min.css"
 
-
-
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",

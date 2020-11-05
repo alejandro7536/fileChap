@@ -1,0 +1,47 @@
+<div class="grid  grid-cols-1 sm:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+<div *ngFor="let archivo of archivos | buscarNombre: cargaImagenesService.buscarTerm"
+  class="flex-shrink-0 relative overflow-hidden rounded-lg shadow-sm w-full border">
+
+  <div class="flex flex-col justify-between px-6 pb-4 mt-4 h-auto">
+    <div class="flex justify-between">
+      <span class="text-sm font-medium text-gray-900">{{archivo.nombre}}</span>
+      <a data-fancybox="gallery" [href]="archivo.url" title="Ver"
+        *ngIf="archivo.type == 'application/pdf' || archivo.icon.icon == 'fa-file-video' || archivo.type == 'image'; else icon">
+        <i class="fas {{archivo.icon.icon}} text-{{archivo.icon.color}}"></i>
+      </a>
+
+      <ng-template #icon>
+        <i *ngIf="archivo.icon.icon != 'fa-file-video'"
+          class="fas {{archivo.icon.icon}} text-{{archivo.icon.color}}"></i>
+      </ng-template>
+
+
+    </div>
+    <span class="text-sm block opacity-75 -mb-1" *ngIf="archivo.size" >{{archivo.size /1024/1024 | number:'.0-2'}} MB</span>
+    <span class="text-sm block opacity-75 -mb-1 mt-1" *ngIf="canRemove"> Compartiendo con: {{archivo.sharedWithName}}</span>
+    <span class="text-sm block opacity-75 -mb-1 mt-1" *ngIf="!canRemove"> Dueño: {{archivo.ownerName}}</span>
+
+
+    <div class="flex mt-4 ">
+      <a target="_blank" [href]="archivo.url" title="Descargar" class="text-gray-700 mr-3">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+      </a>
+
+      <a title="Borrar" (click)="borrar(archivo)" class="cursor-pointer text-gray-700" *ngIf="canRemove" >
+
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+</div>

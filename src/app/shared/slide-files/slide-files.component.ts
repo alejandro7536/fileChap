@@ -59,7 +59,6 @@ export class SlideFilesComponent implements AfterViewInit {
     } else {
 
       options = {
-        loop: true,
         autoplay: true,
         slidesPerView: this.elementos,
         spaceBetween: 15,

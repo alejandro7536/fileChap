@@ -9,7 +9,7 @@
           <div class="flex justify-between">
             <span class="text-sm font-medium text-gray-900"> {{archivo.nombre.length < 29 ? archivo.nombre : archivo.nombre | slice:0:29 }}{{archivo.nombre.length > 29 ? '...' :'' }}</span>
             <a data-fancybox="gallery" [href]="archivo.url" title="Ver"
-              *ngIf="archivo.type == 'application/pdf' else icon">
+              *ngIf="archivo.type == 'application/pdf' || archivo.icon.icon == 'fa-file-video'; else icon">
               <i class="fas {{archivo.icon.icon}} text-{{archivo.icon.color}}"></i>
             </a>
 

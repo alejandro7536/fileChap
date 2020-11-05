@@ -6,6 +6,7 @@ import { CargaComponent } from './carga/carga.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { ArchivosComponent } from './archivos/archivos.component';
+import { SharedFilesComponent } from './shared-files/shared-files.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ArchivosComponent } from './archivos/archivos.component';
           { path: 'fotos', component: FotosComponent},
           { path: 'files', component: ArchivosComponent},
           { path: 'cargar', component: CargaComponent},
+          { path: 'shared', component: SharedFilesComponent},
         ]
       }
     ])

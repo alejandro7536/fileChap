@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, PipeTransform } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
@@ -29,19 +29,14 @@ import { ToastrModule } from 'ngx-toastr';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { LoginComponent } from './auth/login/login.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { ImagesGridComponent } from './shared/images-grid/images-grid.component';
 import { BuscarNombrePipe } from './pipes/buscar-nombre.pipe';
 import { FormsModule } from '@angular/forms';
-import { LoaderComponent } from './shared/loader/loader.component';
-import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { ArchivosComponent } from './components/archivos/archivos.component';
 import { ComponentsComponent } from './components/components.component';
 import { FilesRoutingModule } from './components/components.routing';
-import { SlideImegesComponent } from './shared/slide-imeges/slide-imeges.component';
-import { SlideFilesComponent } from './shared/slide-files/slide-files.component';
-import { FilesGridComponent } from './shared/files-grid/files-grid.component';
+import { SharedModule } from './shared/shared.module';
+import { SharedFilesComponent } from './components/shared-files/shared-files.component';
 registerPlugin(FilePondPluginFileValidateType);
 registerPlugin(FilePondPluginImagePreview);
 registerPlugin(FilePondPluginImageEdit);
@@ -53,17 +48,11 @@ registerPlugin(FilePondPluginImageEdit);
     CargaComponent,
     NgDropFilesDirective,
     LoginComponent,
-    NavbarComponent,
-    ImagesGridComponent,
-    BuscarNombrePipe,
-    LoaderComponent,
-    FooterComponent,
     HomeComponent,
     ArchivosComponent,
     ComponentsComponent,
-    SlideImegesComponent,
-    SlideFilesComponent,
-    FilesGridComponent,
+    SharedFilesComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -78,11 +67,9 @@ registerPlugin(FilePondPluginImageEdit);
 
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-
-
-
+    SharedModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

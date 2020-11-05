@@ -62,7 +62,6 @@ export class SlideImegesComponent implements OnInit, AfterViewInit {
     } else {
 
       options = {
-        loop: true,
         autoplay: true,
         slidesPerView: this.elementos,
         spaceBetween: 15,

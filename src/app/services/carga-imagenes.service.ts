@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
 import { FileItem } from '../models/file-item.model';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
 import { FileUpload } from '../models/fileUpload.interface';
 import { Imagen } from '../models/imagen.interface';
+import * as firebase from 'firebase';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -74,30 +75,57 @@ export class CargaImagenesService {
     return this.db.collection(`data/${this.userid}/files`, ref => ref.orderBy('date', 'desc')).valueChanges();
   }
 
-  eliminar(file: Imagen | FileUpload , tipo?: string) {
-    if (tipo === 'image') {
-      const desertRef = this.storageRef.child(`${this.userid}/img/${file.nombre}`);
-      desertRef.delete().then(()  => {
-        return this.db.collection(`data/${this.userid}/images`).doc(file.uid).delete();
-      }).catch((error) => {
-        this.toastr.error(`${file.nombre} cargada correctamente`, 'Error', {
-          closeButton: true,
-          progressBar: true,
-          positionClass: 'toast-bottom-right'
-        });
+  eliminar(file: Imagen | FileUpload, tipo?: string) {
+
+    this.estaCompartiendo(file.nombre).pipe(take(1)).subscribe(
+      files => {
+
+        if (files.length > 0) {
+          this.toastr.warning(`Estas compartiendo este archivo, no puedes eliminarlo`, 'Ups', {
+            closeButton: true,
+            progressBar: true,
+            positionClass: 'toast-bottom-right'
+          });
+          return;
+        } else {
+
+          if (tipo === 'image') {
+            const desertRef = this.storageRef.child(`${this.userid}/img/${file.nombre}`);
+            desertRef.delete().then(() => {
+              this.db.collection(`data/${this.userid}/images`).doc(file.uid).delete().then(() => {
+                this.toastr.success(`${file.nombre} se eliminó`, 'Completado', {
+                  closeButton: true,
+                  progressBar: true,
+                  positionClass: 'toast-bottom-right'
+                });
+              });
+            }).catch((error) => {
+              this.toastr.error(`${file.nombre} no se eliminó`, 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-bottom-right'
+              });
+            });
+          } else {
+            const desertRef = this.storageRef.child(`${this.userid}/files/${file.nombre}`);
+            desertRef.delete().then(() => {
+              this.db.collection(`data/${this.userid}/files`).doc(file.uid).delete().then(() => {
+                this.toastr.success(`${file.nombre} se eliminó`, 'Completado', {
+                  closeButton: true,
+                  progressBar: true,
+                  positionClass: 'toast-bottom-right'
+                });
+              });
+            }).catch((error) => {
+              this.toastr.error(`${file.nombre} no se eliminó`, 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-bottom-right'
+              });
+            });
+          }
+        }
       });
-    } else {
-      const desertRef = this.storageRef.child(`${this.userid}/files/${file.nombre}`);
-      desertRef.delete().then(()  => {
-        return this.db.collection(`data/${this.userid}/files`).doc(file.uid).delete();
-      }).catch((error) => {
-        this.toastr.error(`${file.nombre} cargada correctamente`, 'Error', {
-          closeButton: true,
-          progressBar: true,
-          positionClass: 'toast-bottom-right'
-        });
-      });
-    }
   }
 
 
@@ -186,17 +214,17 @@ export class CargaImagenesService {
 
   asignarColorIcon(type: string) {
 
-    const pdf = {icon: 'fa-file-pdf', color: 'red-600'};
-    const doc = {icon: 'fa-file-word', color: 'blue-600'};
-    const xls = {icon: 'fa-file-excel', color: 'green-600'};
-    const ppt = {icon: 'fa-file-powerpoint', color: 'orange-600'};
-    const comp = {icon: 'fa-file-archive', color: 'teal-600'};
-    const video = {icon: 'fa-file-video', color: 'yellow-600'};
-    const audio = {icon: 'fa-file-audio', color: 'pink-600'};
-    const csv = {icon: 'fa-file-csv', color: 'green-600'};
-    const apk = {icon: 'fa-gamepad', color: 'green-600'};
-    const code = {icon: 'fa-file-code', color: 'red-600'};
-    const file = {icon: 'fa-file', color: 'gray-600'};
+    const pdf = { icon: 'fa-file-pdf', color: 'red-600' };
+    const doc = { icon: 'fa-file-word', color: 'blue-600' };
+    const xls = { icon: 'fa-file-excel', color: 'green-600' };
+    const ppt = { icon: 'fa-file-powerpoint', color: 'orange-600' };
+    const comp = { icon: 'fa-file-archive', color: 'teal-600' };
+    const video = { icon: 'fa-file-video', color: 'yellow-600' };
+    const audio = { icon: 'fa-file-audio', color: 'pink-600' };
+    const csv = { icon: 'fa-file-csv', color: 'green-600' };
+    const apk = { icon: 'fa-gamepad', color: 'green-600' };
+    const code = { icon: 'fa-file-code', color: 'red-600' };
+    const file = { icon: 'fa-file', color: 'gray-600' };
 
     if (type.startsWith('video')) {
       return video;
@@ -242,6 +270,10 @@ export class CargaImagenesService {
     }
 
 
+  }
+
+  estaCompartiendo(filename: string) {
+    return this.db.collection(`sharedwith/${this.userid}/shared`, ref => ref.where('nombre', '==', filename)).valueChanges();
   }
 
 
