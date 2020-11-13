@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CargaImagenesService } from '../../services/carga-imagenes.service';
 import { Imagen } from '../../models/imagen.interface';
 import { AuthService } from '../../services/auth.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './fotos.component.html',
   styleUrls: ['./fotos.component.css']
 })
-export class FotosComponent implements OnInit {
+export class FotosComponent implements OnInit, OnDestroy {
 
   public imagenes: Imagen[] = [];
   public loading = false;
@@ -20,6 +20,10 @@ export class FotosComponent implements OnInit {
     private auth: AuthService,
     private router: Router
   ) { }
+
+  ngOnDestroy(): void {
+    this.cargaImagenesService.buscarTerm = '';
+  }
 
   ngOnInit(): void {
     this.loading = true;

@@ -46,28 +46,33 @@ export class AuthService {
   login() {
 
     this.authfire.signInWithPopup(new auth.GoogleAuthProvider())
-    .then(async (user: any) => {
+      .then(async (user: any) => {
 
-      let usuario: any;
-      await this.searchUser(user.user.uid).subscribe(userfire => {
-        usuario = userfire;
-      });
+        let usuario: any;
+        await this.searchUser(user.user.uid).subscribe(userfire => {
+          usuario = userfire;
+          console.log(usuario);
 
-      // TODO crear terms page, direccionar ahi al momento de crear el usuario
-      if ( usuario ){
-        this.router.navigateByUrl('files/home');
-      } else {
-        this.saveUser(user.user).then(() => {
-          this.router.navigateByUrl('files/home');
+          if (!usuario) {
+            this.saveUser(user.user);
+          } else {
+
+            if (!usuario.terms) {
+              this.router.navigate(['terms', usuario.googleId]);
+            } else {
+
+              this.router.navigateByUrl('files/home');
+            }
+          }
         });
-      }})
-    .catch( error => {
-      this.toast.warning('Cuenta no valida', 'Ups', {
-        closeButton: true,
-        progressBar: true,
-        positionClass: 'toast-bottom-right'
+      })
+      .catch(error => {
+        this.toast.warning('Cuenta no valida', 'Ups', {
+          closeButton: true,
+          progressBar: true,
+          positionClass: 'toast-bottom-right'
+        });
       });
-    });
 
   }
 
@@ -87,6 +92,8 @@ export class AuthService {
       terms: false,
       photo: user.photoURL,
       googleId: user.uid
+    }).then(() => {
+      this.router.navigate(['terms', user.uid]);
     });
   }
 }

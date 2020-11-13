@@ -37,6 +37,7 @@ import { ComponentsComponent } from './components/components.component';
 import { FilesRoutingModule } from './components/components.routing';
 import { SharedModule } from './shared/shared.module';
 import { SharedFilesComponent } from './components/shared-files/shared-files.component';
+import { TerminosComponent } from './auth/terminos/terminos.component';
 registerPlugin(FilePondPluginFileValidateType);
 registerPlugin(FilePondPluginImagePreview);
 registerPlugin(FilePondPluginImageEdit);
@@ -52,6 +53,7 @@ registerPlugin(FilePondPluginImageEdit);
     ArchivosComponent,
     ComponentsComponent,
     SharedFilesComponent,
+    TerminosComponent,
 
   ],
   imports: [
