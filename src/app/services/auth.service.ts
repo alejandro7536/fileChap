@@ -7,7 +7,7 @@ import { User } from '../models/user.interface';
 import { UserModel } from '../models/user.model';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { async } from '@angular/core/testing';
+import { waitForAsync } from '@angular/core/testing';
 
 
 @Injectable({
@@ -94,6 +94,19 @@ export class AuthService {
       googleId: user.uid
     }).then(() => {
       this.router.navigate(['terms', user.uid]);
+    });
+  }
+
+  acepTerms(userid: string) {
+    this.db.collection(`user`).doc(userid).update({
+      terms: true
+    }).then(() => {
+      this.router.navigateByUrl('files/home');
+      this.toast.success('Haz aceptado los términos y condiciones', 'Success', {
+        closeButton: true,
+        progressBar: true,
+        positionClass: 'toast-bottom-right'
+      });
     });
   }
 }

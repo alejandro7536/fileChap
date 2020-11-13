@@ -15,7 +15,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true}), FilesRoutingModule],
+  imports: [RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }), FilesRoutingModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
