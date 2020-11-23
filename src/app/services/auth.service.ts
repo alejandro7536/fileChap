@@ -3,11 +3,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { auth } from 'firebase/app';
-import { User } from '../models/user.interface';
 import { UserModel } from '../models/user.model';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { waitForAsync } from '@angular/core/testing';
 
 
 @Injectable({
